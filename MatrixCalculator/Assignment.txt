@@ -1,0 +1,29 @@
+Úkol 1:
+Maticová kalkulaèka
+
+Zadání:
+1) Pøeèíst zadání a matice ze standartního vstupu
+
+Formát zadání
+r c t
+1 2 3
+4 5 6
+(operátor)
+1 2 3
+4 5 6
+
+r ... Poèet øádkù matice
+c ... Poèet sloupcù matice
+t ... Transponovat matici pøed operací? ([t] ... Ano/[] ... Ne)
+Operátory:
+* ... Násobení
++ ... Sèítání
+- ... Odèítání
+k ... Kroneckerùv sèítanec (https://en.wikipedia.org/wiki/Kronecker_product)
+... možno i jiné
+
+ - Implementovat pøetíženými operátory
+ - Matice budou objekty
+
+2) Ošetøit program proti chybnému vstupu
+3) Detekovat pøiètení a násobení skalárem (+,-,* se s maticí 1×1 a maticí n×n se provede s každým prvkem z n×n)
