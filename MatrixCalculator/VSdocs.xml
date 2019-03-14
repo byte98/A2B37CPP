@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<docs>
+  <members name="matrix">
+    <summary>
+      Class <c>Matrix</c> to provide calculations with matrix
+    </summary>
+  </members>
+</docs>
