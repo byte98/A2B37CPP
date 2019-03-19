@@ -1,14 +1,81 @@
 CFLAGS += -Wall
+DEBUG_FLAGS += -D _DEBUG
+OUT_NAME = MatrixCalculator.program
+OUT_DEBUG = MatrixCalculator.debug
+OUT_SCRIPT = run
+OUT_MEM_SCRIPT = memcheck
+OUT_DEBUG_SCRIPT = dev
 
-program: Main.o Matrix.o
-	$(CXX) $(CFLAGS) -o program Main.o Matrix.o
+RST = \033[0m
+GRN = \033[1;32m
+YLW = \033[01;33m
+CYN = \033[1;36m
+
+program: $(OUT_NAME) $(OUT_DEBUG)
+
+$(OUT_DEBUG): Main.debug.o Matrix.debug.o
+
+	@$(CXX) $(CFLAGS) $(DEBUG_FLAGS) -o $(OUT_DEBUG) Main.debug.o Matrix.debug.o
+
+$(OUT_NAME): Main.o Matrix.o
+	@$(CXX) $(CFLAGS) -o $(OUT_NAME) Main.o Matrix.o
 
 Main.o: Main.cpp Matrix.h
-	$(CXX) $(CFLAGS) -c Main.cpp
+	@echo -n "Compiling program..."
+	@$(CXX) $(CFLAGS) -c Main.cpp
 
+
+
+Main.debug.o : Main.cpp Matrix.h
+	@$(CXX) $(CFLAGS) $(DEBUG_FLAGS) -c -o Main.debug.o Main.cpp
+	@echo " $(GRN)              Done! $(RST)"
+	@echo -n "Creating startup script..."
+	@touch $(OUT_SCRIPT)
+	@echo "#!/bin/bash" >> $(OUT_SCRIPT)
+	@echo "echo 'Running program $(CYN)$(OUT_NAME)$(RST)'" >> ./$(OUT_SCRIPT)
+	@echo "echo '' " >> ./$(OUT_SCRIPT)
+	@echo "./$(OUT_NAME)" >> ./$(OUT_SCRIPT)
+	@chmod +x ./$(OUT_SCRIPT)
+	@echo " $(GRN)        Done! $(RST)"
+
+	@echo -n "Creating debugging script..."
+	@touch ./$(OUT_DEBUG_SCRIPT)
+	@echo "#!/bin/bash" >> $(OUT_SCRIPT)
+	@echo "echo 'Running debugging version of program $(CYN)$(OUT_NAME)$(RST)'" >> ./$(OUT_DEBUG_SCRIPT)
+	@echo "echo '' " >> ./$(OUT_DEBUG_SCRIPT)
+	@echo "./$(OUT_DEBUG)" >> ./$(OUT_DEBUG_SCRIPT)
+	@chmod +x ./$(OUT_DEBUG_SCRIPT)
+	@echo " $(GRN)      Done! $(RST)"
+
+	@echo -n "Creating memory checking script..."
+	@touch $(OUT_MEM_SCRIPT)
+	@echo "#!/bin/bash" >> $(OUT_MEM_SCRIPT)
+	@echo "echo 'Running memory test of $(CYN)$(OUT_NAME)$(RST)'" >> $(OUT_MEM_SCRIPT)
+	@echo "echo ''" >> $(OUT_MEM_SCRIPT)
+	@echo "valgrind --tool=memcheck --leak-check=full --show-reachable=yes ./$(OUT_NAME)" >> $(OUT_MEM_SCRIPT)
+	@chmod +x ./$(OUT_MEM_SCRIPT)
+	@echo " $(GRN)Done! $(RST)"
+
+	@echo "To run compiled program write '$(YLW)./$(OUT_SCRIPT)$(RST)'."
+	@echo "To run debug version of program write '$(YLW)./$(OUT_DEBUG_SCRIPT)$(RST)'."
+	@echo "To run memory check write '$(YLW)./$(OUT_MEM_SCRIPT)$(RST)'."
+
+Matrix.debug.o : Matrix.h
+	@$(CXX) $(CFLAGS) $(DEBUG_FLAGS) -c -o Matrix.debug.o Matrix.cpp
 
 Matrix.o : Matrix.h
+	@$(CXX) $(CFLAGS) -c -o Matrix.o Matrix.cpp
 
 clean:
-	rm *.o
-	rm program
+	@echo -n "Removing files used to compile program..."
+	@rm *.o
+	@echo " $(GRN) Done! $(RST)"
+	@echo -n "Removing program..."
+	@rm $(OUT_NAME)
+	@rm $(OUT_DEBUG)
+	@echo " $(GRN)                       Done! $(RST)"
+	@echo -n "Removing scripts..."
+	@rm $(OUT_SCRIPT)
+	@rm $(OUT_DEBUG_SCRIPT)
+	@rm $(OUT_MEM_SCRIPT)
+	@echo " $(GRN)                       Done! $(RST)"

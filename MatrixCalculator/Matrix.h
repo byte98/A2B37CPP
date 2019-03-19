@@ -1,8 +1,12 @@
 #ifndef __MATRIX_H__
 #define __MATRIX_H__
+/*
+#define ERR_MATRIX Matrix(-1,-1, false)             //Matrix when there is error
+#define ERR_MATRIX_OPERATOR Matrix(-2, -2, false)   //Matrix, when there is error with operator conditions
+#define NULL_MATRIX Matrix(0, 0, false)             //Empty matrix
+*/
 
-#define ERR_MATRIX Matrix(-1,-1, false)
-#define ERR_MATRIX_OPERATOR Matrix(-2, -2, false);
+#define NULL_MATRIX Matrix(0, 0, false) 
 
 /*
  * Class for matrix calculations
@@ -19,6 +23,10 @@ private:
 
 	//Function to free space of matrix
 	void freeSpace(void);
+
+	//Function to set value to all positions in matrix
+	// int: Value to be set
+	void setValue(int);
 
 public:
 	//Constructor of matrix
@@ -47,16 +55,20 @@ public:
 	void write(void);
 
 	//Function to load matrix from input
-	// return: Matrix loaded from standard input
-	static Matrix loadFromInput(void);
+	void loadFromInput(void);
 
 	//Function to load matrix from input with checking operations conditions
-	// return: Matrix loaded from standard input
-	static Matrix loadFromInput(Matrix, char);
+	// Matrix: Matrix entered as first
+	//   char: Operator
+	void loadFromInput(Matrix, char);
 
 	//Define behaviour of == operator on matrices
 	// return: True if matrices are same, false if not
-	bool operator == (Matrix other);
+	bool operator == (Matrix &);
+
+	//Define behaviour of != operator on matrices
+	// return: True if matrices are different, false if not
+	bool operator != (Matrix &);
 
 	//Function to get count of rows of matrix
 	// return: Count of rows
