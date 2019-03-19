@@ -9,3 +9,6 @@
 1. [Cv 01 / Lab 01](./CV01)
 2. [Cv 02 / Lab 02](./CV02)
 3. [Cv 03 / Lab 03](./CV03)
+
+### Domácí úkoly / Homeworks
+1. [HW 01](./MatrixCalculator) Maticová kalkulačka / Matrix calculator
