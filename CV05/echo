@@ -1,0 +1,4 @@
+Pop: 3
+Pop: 2
+Pop: 1
+terminate called after throwing an instance of 'Stack::EmptyStack*'
