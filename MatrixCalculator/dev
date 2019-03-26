@@ -1,0 +1,4 @@
+#!/bin/bash
+echo 'Running debugging version of program [1;36mMatrixCalculator.program[0m'
+echo '' 
+./MatrixCalculator.debug

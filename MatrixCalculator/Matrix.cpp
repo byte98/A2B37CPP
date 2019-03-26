@@ -44,6 +44,9 @@ Matrix::Matrix(int rows, int cols, bool transpose = false)
 		this->allocateSpace();
 		this->setValue(INT16_MIN);
 	}
+#ifdef _DEBUG
+	std::cout << "% Matrix class instanced." << std::endl;
+#endif // _DEBUG
 
 }
 
@@ -52,6 +55,9 @@ Matrix::Matrix(int rows, int cols, bool transpose = false)
 Matrix::~Matrix()
 {
 	this->freeSpace();
+#ifdef _DEBUG
+	std::cout << "% Matrix class destructed." << std::endl;
+#endif // _DEBUG
 }
 
 
@@ -169,28 +175,13 @@ void Matrix::loadFromInput(Matrix first, char matrix_operator)
 
 	//Rows
 	std::cin >> rows;
-
-	//Addition/substraction condition
-	bool add_sub_c = ((matrix_operator == '+' || matrix_operator == '-') && (rows == first.getRows() || rows == 1));
-
-	//Multiplication condition
-	bool multi_c = (matrix_operator == '*' && (rows == first.getCols() || rows == 1));
-
-	while ((std::cin.good() == false && add_sub_c == false && multi_c == false))
+	while (std::cin.good() == false)
 	{
-		if (std::cin.good() == false)
-		{
-			std::cout << "Wrong input! Number of rows must be an integer." << std::endl << "Enter number of rows:" << std::endl;
-		}
-		else if (add_sub_c == false && (matrix_operator == '+' || matrix_operator == '-'))
-		{
-			std::cout << "Wrong input! Number of rows must be " << first.getCols() << " or 1." << std::endl << "Enter number of rows:" << std::endl;
-		}
+		std::cout << "Wrong input! Number of rows must be an integer." << std::endl;
+		std::cout << "Enter number of rows:" << std::endl;
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cin >> rows;
-		add_sub_c = ((matrix_operator == '+' || matrix_operator == '-') && (rows == first.getRows() || rows == 1));
-		multi_c = (matrix_operator == '*' && (rows == first.getCols() || rows == 1));
 	}
 
 	//Cols
@@ -216,6 +207,11 @@ void Matrix::loadFromInput(Matrix first, char matrix_operator)
 	this->rows = rows;
 	this->cols = cols;
 	this->allocateSpace();
+
+#ifdef _DEBUG
+	std::cout << "% Loaded attributes of matrix: rows=" << rows << "; cols=" << cols << "; transpose=" << (transpose ? "true" : "false") << std::endl;
+#endif // _DEBUG
+
 
 	//Load data
 	for (int r = 0; r < rows; r++)
@@ -295,13 +291,13 @@ bool Matrix::operator != (Matrix &a)
 }
 
 //Get count of rows
-int Matrix::getRows()
+int Matrix::getRows() const
 {
 	return this->rows;
 }
 
 //Get count of cols
-int Matrix::getCols()
+int Matrix::getCols() const
 {
 	return this->cols;
 }
@@ -316,4 +312,61 @@ void Matrix::setValue(int value)
 			this->data[r][c] = value;
 		}
 	}
+}
+
+//Check operation conditinons for rows
+bool Matrix::checkRowCond(Matrix M, int row, char op)
+{
+	bool reti = true;
+	if (op == '+' || op == '-') //Addition & substraction
+	{
+		if (M.getRows() != row && row != 1)
+		{
+			reti = false;
+			std::cout << "Wrong input! Number of rows has to be " << M.getRows() << " or 1." << std::endl;
+		}
+	}
+	else if(op == '*') //Multiplication
+	{
+		if (M.getCols() != row && row != 1)
+		{
+			reti = false;
+			std::cout << "Wrong input! Number of rows has to be " << M.getCols() << " or 1." << std::endl;
+		}
+	}
+
+	return reti;
+}
+
+//Check operation conditions for columns
+bool Matrix::checkColCond(Matrix M, int col, int row, char op)
+{
+	bool reti = true;
+	if (op == '+' || op == '-') //Addition & substraction
+	{
+		if (row != 1 && col != M.getCols())
+		{
+			reti = false;
+			std::cout << "Wrong input! Number of columns has to be " << M.getCols() << "." << std::endl;
+		}
+		else if (row == 1 && col != 1)
+		{
+			reti = false;
+			std::cout << "Wrong input! Number of columns has to be 1." << std::endl;
+		}
+	}
+	else if (op == '*') //Multiplication
+	{
+		if (row != 1 && col != M.getRows())
+		{
+			reti = false;
+			std::cout << "Wrong input! Number of columns has to be " << M.getRows() << "." << std::endl;
+		}
+		else if (row == 1 && col != 1)
+		{
+			reti = false;
+			std::cout << "Wrong input! Number of columns has to be 1." << std::endl;
+		}
+	}
+	return reti;
 }

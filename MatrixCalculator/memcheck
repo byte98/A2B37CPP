@@ -1,0 +1,4 @@
+#!/bin/bash
+echo 'Running memory test of [1;36mMatrixCalculator.program[0m'
+echo ''
+valgrind --tool=memcheck --leak-check=full --show-reachable=yes ./MatrixCalculator.program

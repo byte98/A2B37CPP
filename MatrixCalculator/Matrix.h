@@ -28,6 +28,8 @@ private:
 	// int: Value to be set
 	void setValue(int);
 
+
+
 public:
 	//Constructor of matrix
 	// Parameters:
@@ -72,11 +74,26 @@ public:
 
 	//Function to get count of rows of matrix
 	// return: Count of rows
-	int getRows();
+	int getRows() const;
 
 	//Function to get count of columns of matrix
 	// return: Count of columns
-	int getCols();
+	int getCols() const;
+
+	//Function to check operation conditions applied to row
+	// Matrix: First matrix to compare conditions to
+	// int: Rows to check
+	// char: Operator
+	// return: True if is correct, false if not
+	static bool checkRowCond(Matrix, int, char);
+
+	//Function to check operation conditions applied to column
+	// Matrix: First matrix to compare conditions to
+	// int: Columns to check
+	// int: Rows to check
+	// char: Operator
+	// return: True if is correct, false if not
+	static bool checkColCond(Matrix, int, int, char);
 
 };
 #endif // !__MATRIX_H__

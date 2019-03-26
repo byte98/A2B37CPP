@@ -19,8 +19,10 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		std::cout << "Loaded matrix:" << std::endl;
+#ifdef _DEBUG
+		std::cout << "% Loaded matrix:" << std::endl;
 		M1.write();
+#endif // _DEBUG
 
 		//Load operator
 		bool correct = false;
@@ -38,12 +40,21 @@ int main(int argc, char *argv[])
 				{
 				case '+':
 					correct = true;
+#ifdef _DEBUG
+					std::cout << "% Selected operation: addition." << std::endl;
+#endif // _DEBUG
 					break;
 				case '-':
 					correct = true;
+#ifdef _DEBUG
+					std::cout << "% Selected operation: substraction." << std::endl;
+#endif // _DEBUG
 					break;
 				case '*':
 					correct = true;
+#ifdef _DEBUG
+					std::cout << "% Selected operation: multiplication." << std::endl;
+#endif // _DEBUG
 					break;
 				default:
 					std::cout << "Wrong operator! Allowed operators: '+', '-', '*'." << std::endl;
@@ -55,8 +66,10 @@ int main(int argc, char *argv[])
 		//Load second matrix
 		Matrix M2 = NULL_MATRIX;
 		M2.loadFromInput(M1, matrix_operator);
-		std::cout << "Loaded matrix:" << std::endl;
+#ifdef _DEBUG
+		std::cout << "% Loaded matrix:" << std::endl;
 		M2.write();
+#endif // _DEBUG
 		if (M2 == NULL_MX)
 		{
 			reti = EXIT_ERR_INPUT;
