@@ -1,0 +1,20 @@
+Úkol 2 CPP 2019
+
+Implementujte bibliografickou databázi pomoci STD map. Inspitujte se 3. pøíkladem ze cvièení 8.
+
+Pøedpokládá se:
+ - unifikované rozhraní pomocí virtuálních funkcí
+ - dceøiné tøídy budou "book" a "article"
+
+book: author, title, year
+article: author, title, journal, year, issue
+
+
+ - funkce na vyhledávání podle autora
+ - funkce na export ve formátu BibTex:
+@book{  uniq_key
+	author = "Name",
+	title = "title",
+	year = "1998"
+}
+

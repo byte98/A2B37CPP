@@ -1,4 +1,4 @@
-
+#pragma once
 /*
  * Copyright 2019 Jiri Skoda<skodaji4@fel.cvut.cz>
  *
@@ -14,26 +14,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-/// <summary>
-/// Calculator class definition
-/// </summary>
-
-#include "matrix.h"
 
 /// <summary>
-/// Class to provide enviroment to run matrix calculus
+/// Symbol definitions for matrix operations
 /// </summary>
-class Calculator
-{
-private:
-	Matrix* M1;
-	Matrix* M2;
-	char operation;
-public:
-	Calculator();
-	~Calculator();
-	int run(void);
-	int loadFirstMatrix(void);
-	int loadSecondMatrix(void);
 
-};
+
+
+/// <summary>
+/// Symbol for addition
+/// </summary>
+#define ADDITION '+'
+
+/// <summary>
+/// Symbol for substraction
+/// </summary>
+#define SUBSTRACTION '-'
+
+/// <summary>
+/// Symbol for multiplication
+/// </summary>
+#define MULTIPLICATION '*'
+
+/// <summary>
+/// Symbol for Hadramard product
+/// </summary>
+#define HADRAMARD 'h'
+
+/// <summary>
+/// Symbol for Kronecker product
+/// </summary>
+#define KRONECKER 'k'
+

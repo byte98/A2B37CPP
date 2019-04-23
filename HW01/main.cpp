@@ -18,7 +18,12 @@
 /// Here program starts (obviously)
 /// </summary>
 
+#include "calculator.h"
+#include "errors.h"
+#include <iostream>
+#include "colours.h"
 
+#pragma warning(disable:4996)
 
 
 
@@ -30,5 +35,18 @@
 /// <returns>0 if everything gone ok, something different if not</returns>
 int main(int argc, char*argv[])
 {
+	int reti = OK;
+	Calculator matrixcalc;
+	reti = matrixcalc.run();
+	std::cout << std::endl << "===========================================" << std::endl;
+	std::cout << "Program exited with code "<< (reti == OK ? BGREEN : BRED)  << reti << " (0x" << std::hex << reti << ")" << RST << "." << std::endl;
+	std::cout << "To see, what does it mean, look into" << BMAGENTA << "errors.h" << RST << "." << std::endl;
 
+	//Wait for something
+	std::cout << std::endl;
+	std::cin.ignore(1024, '\n');
+	std::cout << "Press enter to continue..." << std::endl;
+	std::cin.get(); 
+	
+	return reti;
 }

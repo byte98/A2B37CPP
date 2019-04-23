@@ -13,6 +13,10 @@
       <UniqueIdentifier>{59e7ad51-90c8-46ae-993b-649455548afc}</UniqueIdentifier>
       <Extensions>*.h</Extensions>
     </Filter>
+    <Filter Include="Compile">
+      <UniqueIdentifier>{356ddf52-11ad-4ed0-b178-e7f852edeea9}</UniqueIdentifier>
+      <Extensions>Makefile</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -26,15 +30,25 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="errcodes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="matrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="calculator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="errors.h" />
+    <ClInclude Include="errors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="colours.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="operations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Makefile">
+      <Filter>Compile</Filter>
+    </Text>
   </ItemGroup>
 </Project>
